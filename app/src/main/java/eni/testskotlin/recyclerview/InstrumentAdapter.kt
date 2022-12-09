@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import eni.testskotlin.databinding.RecyclerLineBinding
 import eni.testskotlin.recyclerview.bo.Instrument
 
-class InstrumentAdapter(val instruments : ArrayList<Instrument>) : RecyclerView.Adapter<InstrumentAdapter.ViewHolder>() {
+class InstrumentAdapter(val instruments: ArrayList<Instrument>, val click: (Instrument) -> Unit) : RecyclerView.Adapter<InstrumentAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -15,6 +15,7 @@ class InstrumentAdapter(val instruments : ArrayList<Instrument>) : RecyclerView.
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = instruments[position]
+        holder.binding.root.setOnClickListener{click(item)}
         holder.bind(item)
     }
 
